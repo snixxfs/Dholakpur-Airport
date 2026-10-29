@@ -1,0 +1,30 @@
+name: Daily Airport Telemetry Heartbeat
+
+on:
+  schedule:
+    # Trigger everyday at 00:00 UTC (05:30 AM IST)
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Record Airfield Telemetry Heartbeat
+        run: |
+          mkdir -p .github
+          echo "Dholakpur Airfield operational heartbeat: $(date -u)" >> .github/telemetry.log
+
+      - name: Commit and Push
+        run: |
+          git config user.name "Ayush"
+          git config user.email "ayushak12n@gmail.com"
+          git add .github/telemetry.log
+          git commit -m "chore: record daily airfield telemetry heartbeat [skip ci]" || exit 0
+          git push
