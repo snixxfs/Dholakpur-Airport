@@ -60,6 +60,10 @@ const PRESETS: Record<CameraPreset, { pos: THREE.Vector3; target: THREE.Vector3 
     pos: new THREE.Vector3(-102, 14, 68),
     target: new THREE.Vector3(-135, 3, 48),
   },
+  cockpit: {
+    pos: new THREE.Vector3(-160, 9, -72),
+    target: new THREE.Vector3(80, 2, -72),
+  },
 };
 
 function CameraRig() {

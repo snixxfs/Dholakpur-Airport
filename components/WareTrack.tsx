@@ -64,6 +64,7 @@ function FloatingControls() {
     { id: 'aircraft', label: 'Tracking' },
     { id: 'gate', label: 'Gate 202' },
     { id: 'runway', label: 'RWY 09L' },
+    { id: 'cockpit', label: 'Cockpit' },
     { id: 'taxi', label: 'Taxi Stand' },
     { id: 'helipad', label: 'VIP Helipad' },
     { id: 'ground', label: 'Ramp View' },

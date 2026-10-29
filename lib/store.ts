@@ -10,7 +10,7 @@ import { type WeatherType, type WeatherCondition, getWeatherCondition } from './
 export const SIM_SCALE = 30;
 
 export type TimeOfDay = 'day' | 'sunset' | 'night';
-export type CameraPreset = 'overview' | 'aircraft' | 'gate' | 'runway' | 'ground' | 'free' | 'terminal' | 'taxi' | 'helipad';
+export type CameraPreset = 'overview' | 'aircraft' | 'gate' | 'runway' | 'ground' | 'free' | 'terminal' | 'taxi' | 'helipad' | 'cockpit';
 
 export type FlightPhase =
   | 'approaching'     // On 3-degree ILS Cat-III approach
