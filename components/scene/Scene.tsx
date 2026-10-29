@@ -12,6 +12,7 @@ import { WeatherEffects } from './WeatherEffects';
 import { ApproachLights } from './ApproachLights';
 import { FuelFarm } from './FuelFarm';
 import { FireStation } from './FireStation';
+import { PerimeterSecurity } from './PerimeterSecurity';
 import { Warehouse, type GateVisual } from './Warehouse';
 import { AircraftFleet, GroundFleet, RoadFleet, PassengerFleet } from './Vehicles';
 import { AirportDebugVisualizer } from './DebugVisualizer';
@@ -364,6 +365,7 @@ export default function Scene() {
         <ApproachLights />
         <FuelFarm />
         <FireStation />
+        <PerimeterSecurity />
         <Warehouse docks={gates} dockStates={gateStates.split(',') as GateVisual[]} />
         <AircraftFleet />
         <GroundFleet />
