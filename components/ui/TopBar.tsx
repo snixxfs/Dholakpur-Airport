@@ -11,8 +11,11 @@ import {
   PlusCircle,
   Radio,
   Search,
+  Volume2,
+  VolumeX,
   Wind,
 } from 'lucide-react';
+import { airportAudio } from '@/lib/audio';
 import { useWT } from '@/lib/store';
 import { type WeatherType } from '@/lib/sim/weather';
 import { airportHealth, useSelectAndFocus } from './shared';
@@ -328,6 +331,32 @@ function EventBell() {
   );
 }
 
+function SoundButton() {
+  const [muted, setMuted] = useState(true);
+  const toggle = () => {
+    const unmuted = airportAudio.toggleMute();
+    setMuted(!unmuted);
+    if (unmuted) {
+      airportAudio.playTerminalChime();
+    }
+  };
+
+  return (
+    <button
+      className="icon-btn"
+      onClick={toggle}
+      title={muted ? 'Unmute Airfield Soundscape' : 'Mute Airfield Soundscape'}
+      style={{
+        background: 'rgba(15, 23, 42, 0.75)',
+        border: muted ? '1px solid rgba(51, 65, 85, 0.6)' : '1px solid #38bdf8',
+        color: muted ? '#94a3b8' : '#38bdf8',
+      }}
+    >
+      {muted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+    </button>
+  );
+}
+
 export function TopBar() {
   const forceSpawnFlight = useWT((s) => s.forceSpawnFlight);
 
@@ -363,6 +392,7 @@ export function TopBar() {
           <PlusCircle size={14} />
           <span>Inbound Flight</span>
         </button>
+        <SoundButton />
         <EventBell />
         <LiveClock />
       </div>
