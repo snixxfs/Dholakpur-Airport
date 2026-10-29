@@ -5,6 +5,7 @@ import { immer } from 'zustand/middleware/immer';
 import { AIRLINES, AIRCRAFT_MODELS, DESTINATIONS, SITES, type AirportSeed } from './data';
 import { gateX, GATE_COUNT } from './layout';
 import { simEngine, type SimAircraft, type SimPhase } from './sim/engine';
+import { type WeatherType, type WeatherCondition, getWeatherCondition } from './sim/weather';
 
 export const SIM_SCALE = 30;
 
@@ -175,6 +176,9 @@ export interface Store {
   clock: number;
   timeOfDay: TimeOfDay;
   cameraPreset: CameraPreset;
+  weatherType: WeatherType;
+  weatherCondition: WeatherCondition;
+  setWeatherType: (w: WeatherType) => void;
   tick: (dt: number) => void;
   setActiveSite: (id: string) => void;
   select: (sel: Selection) => void;
@@ -540,7 +544,24 @@ export const useWT = create<Store>()(
     clock: 0,
     timeOfDay: 'day',
     cameraPreset: 'overview',
+    weatherType: 'clear',
+    weatherCondition: getWeatherCondition('clear'),
     debugOverlay: false,
+
+    setWeatherType: (w) =>
+      set((s) => {
+        s.weatherType = w;
+        s.weatherCondition = getWeatherCondition(w);
+        const activeSite = s.sites[s.activeSiteId];
+        if (activeSite) {
+          activeSite.weather.condition = s.weatherCondition.name;
+          activeSite.weather.windHeading = s.weatherCondition.windHeading;
+          activeSite.weather.windSpeedKts = s.weatherCondition.windSpeedKts;
+          activeSite.weather.temp = s.weatherCondition.temp;
+          activeSite.weather.wind = `${s.weatherCondition.windHeading}° @ ${s.weatherCondition.windSpeedKts} kts`;
+          activeSite.weather.altimeter = `${s.weatherCondition.altimeterHpa} hPa`;
+        }
+      }),
 
     toggleDebugOverlay: () =>
       set((s) => {

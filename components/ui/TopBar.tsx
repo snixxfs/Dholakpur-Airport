@@ -14,6 +14,7 @@ import {
   Wind,
 } from 'lucide-react';
 import { useWT } from '@/lib/store';
+import { type WeatherType } from '@/lib/sim/weather';
 import { airportHealth, useSelectAndFocus } from './shared';
 
 function useOutside(ref: React.RefObject<HTMLElement | null>, close: () => void) {
@@ -222,8 +223,28 @@ function SearchBox() {
 
 function AtisWeatherChip() {
   const site = useWT((s) => s.sites[s.activeSiteId]);
+  const weatherType = useWT((s) => s.weatherType);
+  const weatherCondition = useWT((s) => s.weatherCondition);
+  const setWeatherType = useWT((s) => s.setWeatherType);
+
+  const cycleWeather = () => {
+    const list: WeatherType[] = ['clear', 'monsoon', 'fog', 'overcast', 'thunderstorm'];
+    const nextIdx = (list.indexOf(weatherType) + 1) % list.length;
+    setWeatherType(list[nextIdx]);
+  };
+
+  const badgeColor =
+    weatherType === 'monsoon'
+      ? '#38bdf8'
+      : weatherType === 'thunderstorm'
+      ? '#f43f5e'
+      : weatherType === 'fog'
+      ? '#94a3b8'
+      : '#eab308';
+
   return (
     <div
+      onClick={cycleWeather}
       className="card weather-badge"
       style={{
         display: 'flex',
@@ -232,14 +253,15 @@ function AtisWeatherChip() {
         padding: '5px 10px',
         fontSize: '11px',
         background: 'rgba(15, 23, 42, 0.75)',
-        border: '1px solid rgba(56, 189, 248, 0.25)',
+        border: `1px solid ${badgeColor}66`,
         color: '#f8fafc',
+        cursor: 'pointer',
       }}
-      title={`Kempegowda ATIS Info 'Bravo': ${site.weather.wind} · Vis ${site.weather.visibility} · QNH ${site.weather.altimeter}`}
+      title={`Click to cycle weather (METAR: ${weatherCondition.metar})`}
     >
-      <Wind size={14} color="#38bdf8" />
+      <Wind size={14} color={badgeColor} />
       <span>
-        <b style={{ color: '#38bdf8' }}>ATIS</b> · RWY 09L · {site.weather.wind} · {site.weather.temp}°C · CAVOK
+        <b style={{ color: badgeColor }}>{weatherType.toUpperCase()}</b> · RWY 09L · {site.weather.wind} · {site.weather.temp}°C
       </span>
     </div>
   );
