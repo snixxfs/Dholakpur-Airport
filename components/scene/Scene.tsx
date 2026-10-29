@@ -11,6 +11,7 @@ import { HelipadZone } from './Helipad';
 import { WeatherEffects } from './WeatherEffects';
 import { ApproachLights } from './ApproachLights';
 import { FuelFarm } from './FuelFarm';
+import { FireStation } from './FireStation';
 import { Warehouse, type GateVisual } from './Warehouse';
 import { AircraftFleet, GroundFleet, RoadFleet, PassengerFleet } from './Vehicles';
 import { AirportDebugVisualizer } from './DebugVisualizer';
@@ -362,6 +363,7 @@ export default function Scene() {
         <WeatherEffects />
         <ApproachLights />
         <FuelFarm />
+        <FireStation />
         <Warehouse docks={gates} dockStates={gateStates.split(',') as GateVisual[]} />
         <AircraftFleet />
         <GroundFleet />
