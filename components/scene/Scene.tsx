@@ -9,6 +9,7 @@ import { Grounds } from './Grounds';
 import { LandsideRoads } from './LandsideRoads';
 import { HelipadZone } from './Helipad';
 import { WeatherEffects } from './WeatherEffects';
+import { ApproachLights } from './ApproachLights';
 import { Warehouse, type GateVisual } from './Warehouse';
 import { AircraftFleet, GroundFleet, RoadFleet, PassengerFleet } from './Vehicles';
 import { AirportDebugVisualizer } from './DebugVisualizer';
@@ -358,6 +359,7 @@ export default function Scene() {
         <LandsideRoads />
         <HelipadZone />
         <WeatherEffects />
+        <ApproachLights />
         <Warehouse docks={gates} dockStates={gateStates.split(',') as GateVisual[]} />
         <AircraftFleet />
         <GroundFleet />
