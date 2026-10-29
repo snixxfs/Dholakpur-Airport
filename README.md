@@ -58,6 +58,19 @@ Every flight experiences an authentic turnaround sequence synchronized with grou
   - `Apron Gates` overview
   - `VIP Helipad` focus
   - `Taxi Stand` curbside monitoring
+  - `Cockpit` first-person pilot view
+
+### 7. Meteorological Weather Engine & Environmental FX
+- Dynamic tropical weather simulation supporting **Clear**, **Monsoon Rain**, **CAT-II Morning Mist/Fog**, **Overcast**, and **Thunderstorms**.
+- Generates authentic ICAO METAR aviation weather telemetry for VOBL / VDLP with live wind direction and speed.
+- Instanced 3D rain particle engine with animated falling streaks and dynamic cloud ceiling adjustments.
+
+### 8. Airside Infrastructure & Ground Support Facilities
+- **PAPI & ALS**: Precision Approach Path Indicator 4-unit light boxes and CAT-II Approach Lighting System.
+- **Bulk Jet-A1 Fuel Farm**: Storage tanks, concrete containment bunds, and hydrant pumping manifolds.
+- **Cat-9 ARFF Fire Station**: Rapid intervention vehicle bays, rooftop watch room, and heavy 6x6 crash tender.
+- **Surface Weathering Details**: Runway touchdown rubber skid marks, apron hydraulic staining, and blast deflectors.
+- **Web Audio Soundscape**: Procedural audio engine synthesizing jet engine spool-up and airport chimes.
 - **Floating Controls**: Real-time simulation speed slider (1x, 2x, 5x), day/sunset/night lighting toggle, and sound controls.
 
 ---
