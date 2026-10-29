@@ -13,6 +13,7 @@ import { ApproachLights } from './ApproachLights';
 import { FuelFarm } from './FuelFarm';
 import { FireStation } from './FireStation';
 import { PerimeterSecurity } from './PerimeterSecurity';
+import { SurfaceDetails } from './SurfaceDetails';
 import { Warehouse, type GateVisual } from './Warehouse';
 import { AircraftFleet, GroundFleet, RoadFleet, PassengerFleet } from './Vehicles';
 import { AirportDebugVisualizer } from './DebugVisualizer';
@@ -370,6 +371,7 @@ export default function Scene() {
         <FuelFarm />
         <FireStation />
         <PerimeterSecurity />
+        <SurfaceDetails />
         <Warehouse docks={gates} dockStates={gateStates.split(',') as GateVisual[]} />
         <AircraftFleet />
         <GroundFleet />
