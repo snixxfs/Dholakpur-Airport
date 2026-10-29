@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useActiveSite, useWT } from '@/lib/store';
 import { Progress, gateStatus, gateTone, useSelectAndFocus } from './shared';
 
-type Tab = 'flights' | 'gates' | 'ground' | 'atc';
+type Tab = 'flights' | 'gates' | 'ground' | 'atc' | 'analytics';
 
 export function OpsTabs() {
   const [tab, setTab] = useState<Tab>('flights');
@@ -14,11 +14,12 @@ export function OpsTabs() {
 
   const flights = [...site.flights];
 
-  const tabs: { id: Tab; label: string; count: number }[] = [
+  const tabs: { id: Tab; label: string; count: number | string }[] = [
     { id: 'flights', label: 'Flight FIDS', count: flights.length },
     { id: 'gates', label: 'Stands 201-204', count: site.gates.length },
     { id: 'ground', label: 'Ground GSE', count: site.vehicles.length },
     { id: 'atc', label: 'Tower Radio', count: site.events.length },
+    { id: 'analytics', label: 'Airfield KPI', count: '98%' },
   ];
 
   return (
@@ -189,6 +190,35 @@ export function OpsTabs() {
               </span>
             </div>
           ))}
+
+        {/* ================= 5. AIRFIELD ANALYTICS TAB ================= */}
+        {tab === 'analytics' && (
+          <div style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+              <div style={{ background: 'rgba(30, 41, 59, 0.7)', padding: '8px 10px', borderRadius: '4px' }}>
+                <div style={{ fontSize: '10px', color: '#94a3b8' }}>RUNWAY OCCUPANCY TIME (ROT)</div>
+                <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#38bdf8' }}>52 sec <small style={{ fontSize: '10px', color: '#22c55e' }}>(-4s Target)</small></div>
+              </div>
+              <div style={{ background: 'rgba(30, 41, 59, 0.7)', padding: '8px 10px', borderRadius: '4px' }}>
+                <div style={{ fontSize: '10px', color: '#94a3b8' }}>ON-TIME DEPARTURE (OTD)</div>
+                <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#22c55e' }}>96.4% <small style={{ fontSize: '10px', color: '#22c55e' }}>ACOG Gold</small></div>
+              </div>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+              <div style={{ background: 'rgba(30, 41, 59, 0.7)', padding: '8px 10px', borderRadius: '4px' }}>
+                <div style={{ fontSize: '10px', color: '#94a3b8' }}>JET-A1 HYDRANT FLOW</div>
+                <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#f59e0b' }}>14,280 L/hr</div>
+              </div>
+              <div style={{ background: 'rgba(30, 41, 59, 0.7)', padding: '8px 10px', borderRadius: '4px' }}>
+                <div style={{ fontSize: '10px', color: '#94a3b8' }}>GSE FLEET UTILIZATION</div>
+                <div style={{ fontSize: '16px', fontWeight: 'bold', color: '#a855f7' }}>84% Active</div>
+              </div>
+            </div>
+            <div style={{ fontSize: '11px', color: '#64748b', textAlign: 'center', marginTop: '4px' }}>
+              Kempegowda International Airport (BLR/VOBL) Telemetry System v2.1
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
